@@ -10,13 +10,8 @@ So far you can browse the images in cloudinary and add upload to cloudinary ONLY
 - maybe remove wagtailimages from the admin menu or at least make it clear they are separate things.
 
 ## Installation
-To install the package you can use the master branch like this:
 ```
-pip install -e git+git://github.com/emg36/wagtailcloudinary.git#egg=wagtailcloudinary
-```
-Or you can used a stable version:
-```
-pip install -e git+git://github.com/emg36/wagtailcloudinary.git@v0.3.1#egg=wagtailcloudinary
+pip install -e git+git://github.com/emg36/wagtailcloudinary.git
 ```
 
 ## Configuration
