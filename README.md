@@ -1,16 +1,22 @@
 # Use cloudinary within wagtail
 
 ## About
-This package adds Cloudinary support to Wagtail CMS
+This package adds Cloudinary support to Wagtail CMS.
+
+So far you can browse the images in cloudinary and add upload to cloudinary ONLY in the image chooser within a page.
+
+## To do (maybe)
+- modeladmin for cloudinary images
+- maybe remove wagtailimages from the admin menu or at least make it clear they are separate things.
 
 ## Installation
 To install the package you can use the master branch like this:
 ```
-pip install -e git+git://github.com/dteskera/wagtailcloudinary.git#egg=wagtailcloudinary
+pip install -e git+git://github.com/emg36/wagtailcloudinary.git#egg=wagtailcloudinary
 ```
 Or you can used a stable version:
 ```
-pip install -e git+git://github.com/dteskera/wagtailcloudinary.git@v0.3#egg=wagtailcloudinary
+pip install -e git+git://github.com/emg36/wagtailcloudinary.git@v0.3.1#egg=wagtailcloudinary
 ```
 
 ## Configuration
@@ -41,8 +47,8 @@ cloudinary.config(
 in models.py
 
 ```
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailcore.models import Page
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.core.models import Page
 from wagtailcloudinary.fields import CloudinaryField, CloudinaryWidget
 
 class SomePage(Page):
@@ -51,4 +57,19 @@ class SomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('image', widget=CloudinaryWidget),
     ]
+```
+
+in urls.py
+
+```
+...
+
+from wagtailcloudinary import site as cloud_site
+
+urlpatterns = [
+    ...
+    url(r'^cloundinary_images/', cloud_site.urls),
+    ...
+    url(r'', include(wagtail_urls)),
+]
 ```
