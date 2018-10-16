@@ -1,5 +1,5 @@
 import cloudinary
-import cloudinary.api
+from cloudinary import api, uploader
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -7,8 +7,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 from django.views.decorators.cache import never_cache
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
+from wagtail.core import hooks
+from wagtail.admin.modal_workflow import render_modal_workflow
 
 
 @hooks.register('insert_global_admin_css')
@@ -21,9 +21,9 @@ def global_admin_js():
     html = []
     scripts = [
         static('wagtailcloudinary/js/csrf-token.js'),
-        static('js/jquery.ui.widget.js'),
-        static('js/jquery.iframe-transport.js'),
-        static('js/jquery.fileupload.js'),
+        static('wagtailadmin/js/vendor/jquery-ui-1.12.1.min.js'),
+        static('wagtailadmin/js/vendor/jquery.iframe-transport.js'),
+        static('wagtailadmin/js/vendor/jquery.fileupload.js'),
     ]
     for item in scripts:
         html.append('<script src="{}"></script>'.format(item))
